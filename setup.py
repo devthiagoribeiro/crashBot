@@ -11,8 +11,6 @@ options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 options.add_argument('start-maximized')
 
-chid = ''
-bot_token = ''
 bot = telepot.Bot(bot_token)
 link_blaze = '<a href="https://blaze.com/pt/games/crash">💻Blaze</a>'
 
@@ -42,6 +40,7 @@ def resultado(lista):
             bot.sendMessage(chid, f'❌Loss!!')
 
 def rodarBot():
+    bot.sendMessage(chid, 'testando bot')
     page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
     #page = webdriver.Chrome(executable_path=r'./chromedriver.exe' ,options=options)
     page.get('https://blaze.com/pt/games/crash')
