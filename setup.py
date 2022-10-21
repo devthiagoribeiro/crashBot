@@ -11,8 +11,8 @@ options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 options.add_argument('start-maximized')
 
-chid = 'CHANNEL_ID'
-bot = telepot.Bot('BOT_TOKEN')
+chid = '-1001822238932'
+bot = telepot.Bot('5681852093:AAHVbbHGzJb62jBeLwqyeNStpCt6hhAQDiE')
 link_blaze = '<a href="https://blaze.com/pt/games/crash">💻Blaze</a>'
 
 def analise(lista):
