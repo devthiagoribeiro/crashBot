@@ -4,17 +4,16 @@ from time import sleep
 import telepot
 import os
 
-
-chid = 'CHANNEL_ID'
-bot = telepot.Bot('BOT_TOKEN')
-link_blaze = '<a href="https://blaze.com/pt/games/crash">💻Blaze</a>'
-
 options = webdriver.ChromeOptions()
 options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 options.add_argument('start-maximized')
+
+chid = 'CHANNEL_ID'
+bot = telepot.Bot('BOT_TOKEN')
+link_blaze = '<a href="https://blaze.com/pt/games/crash">💻Blaze</a>'
 
 def analise(lista):
     item_1 = float(lista[0])
@@ -42,9 +41,10 @@ def resultado(lista):
             bot.sendMessage(chid, f'❌Loss!!')
 
 def rodarBot():
-    #page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
-    page = webdriver.Chrome(executable_path=r'./chromedriver.exe' ,options=options)
+    page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
+    #page = webdriver.Chrome(executable_path=r'./chromedriver.exe' ,options=options)
     page.get('https://blaze.com/pt/games/crash')
+    print('abrindo navegador')
     sleep(5)
     while True:
         entries = page.find_element(By.XPATH, '//*[@id="crash-recent"]/div[2]/div[2]').get_attribute('textContent')
