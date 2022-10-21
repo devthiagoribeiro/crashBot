@@ -1,6 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from time import sleep
 import telepot
@@ -44,8 +42,8 @@ def resultado(lista):
             bot.sendMessage(chid, f'❌Loss!!')
 
 def rodarBot():
-    # page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
     page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
+    #page = webdriver.Chrome(executable_path=r'./chromedriver.exe' ,options=options)
     page.get('https://blaze.com/pt/games/crash')
     sleep(5)
     while True:
