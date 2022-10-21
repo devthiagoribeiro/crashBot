@@ -11,7 +11,7 @@ options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 options.add_argument('start-maximized')
 
-bot = telepot.Bot(bot_token)
+bot = telepot.Bot('BOT_TOKEN')
 link_blaze = '<a href="https://blaze.com/pt/games/crash">💻Blaze</a>'
 
 def analise(lista):
@@ -19,15 +19,15 @@ def analise(lista):
     item_2 = float(lista[1])
     item_3 = float(lista[2])
     if (item_1 == 1) and (item_2 > 1):
-        bot.sendMessage(chid, text=f'🚨Atenção🚨\n🎰Possível entrada...\n⏳Aguardar confirmação\n{link_blaze}', parse_mode='HTML', disable_web_page_preview=True)
+        bot.sendMessage('CHANNEL_ID', text=f'🚨Atenção🚨\n🎰Possível entrada...\n⏳Aguardar confirmação\n{link_blaze}', parse_mode='HTML', disable_web_page_preview=True)
     if (item_1 > 1) and (item_2 == 1):
         if item_3 != 1:
-            bot.sendMessage(chid, f'😢 Entrada abortada')
+            bot.sendMessage('CHANNEL_ID', f'😢 Entrada abortada')
     if (item_1 == 1) and (item_2 == 1):
         if item_3 == 1:
             pass
         else:
-            bot.sendMessage(chid, f'☑️Entrada confirmada\n📈Entrar com auto retirada em 1.5x')
+            bot.sendMessage('CHANNEL_ID', f'☑️Entrada confirmada\n📈Entrar com auto retirada em 1.5x')
 
 def resultado(lista):
     item_1 = float(lista[0])
@@ -35,12 +35,12 @@ def resultado(lista):
     item_3 = float(lista[2])
     if lista[1:3] == ['1.00', '1.00']:
         if item_1 >= 1.5:
-            bot.sendMessage(chid, f'🏆Win!!')
+            bot.sendMessage('CHANNEL_ID', f'🏆Win!!')
         else:
-            bot.sendMessage(chid, f'❌Loss!!')
+            bot.sendMessage('CHANNEL_ID', f'❌Loss!!')
 
 def rodarBot():
-    bot.sendMessage(chid, 'testando bot')
+    bot.sendMessage('CHANNEL_ID', 'testando bot')
     page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
     #page = webdriver.Chrome(executable_path=r'./chromedriver.exe' ,options=options)
     page.get('https://blaze.com/pt/games/crash')
