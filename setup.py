@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
+import chromedriver_autoinstaller
 from time import sleep
 import telepot
 import os
@@ -44,12 +45,13 @@ def resultado(lista):
 
 def rodarBot():
     page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
+    # page = webdriver.Chrome(service=Service(chromedriver_autoinstaller.install()) ,options=options)
     page.get('https://blaze.com/pt/games/crash')
     print('abrindo navegador')
     sleep(5)
     while True:
         entries = page.find_element(By.XPATH, '//*[@id="crash-recent"]/div[2]/div[2]').get_attribute('textContent')
-        results = entries.split('X')
+        results = entries.split('X')[:15]
         print(results)
         analise(results)
         resultado(results)
@@ -57,11 +59,11 @@ def rodarBot():
         while (results_b[0] == results[0]) and (results_b[1] == results[1]):
             ppg = page.find_element(By.XPATH, '//*[@id="crash-recent"]/div[2]/div[2]').get_attribute('textContent')
             results_b = ppg.split('X')
-        page.refresh()
-        wait_selector = ''
-        while wait_selector != '2x':
-            wait_selector = page.find_element(By.XPATH, '//*[@id="crash-controller"]/div[1]/div[2]/div[1]/div[1]/button[2]').get_attribute('textContent')
-            sleep(.5)
-        sleep(.5)
+        # page.refresh()
+        # wait_selector = ''
+        # while wait_selector != '2x':
+        #     wait_selector = page.find_element(By.XPATH, '//*[@id="crash-controller"]/div[1]/div[2]/div[1]/div[1]/button[2]').get_attribute('textContent')
+        #     sleep(.5)
+        # sleep(.5)
 
 rodarBot()
