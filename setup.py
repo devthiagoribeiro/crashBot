@@ -49,20 +49,21 @@ def rodarBot():
     print('abrindo navegador')
     sleep(5)
     while True:
-        entries = page.find_element(By.XPATH, '//*[@id="crash-recent"]/div[2]/div[2]').get_attribute('textContent')
-        results = entries.split('X')[:15]
-        print(results)
-        analise(results)
-        resultado(results)
-        results_b = results
-        while (results_b[0] == results[0]) and (results_b[1] == results[1]):
-            ppg = page.find_element(By.XPATH, '//*[@id="crash-recent"]/div[2]/div[2]').get_attribute('textContent')
-            results_b = ppg.split('X')
-        # page.refresh()
-        # wait_selector = ''
-        # while wait_selector != '2x':
-        #     wait_selector = page.find_element(By.XPATH, '//*[@id="crash-controller"]/div[1]/div[2]/div[1]/div[1]/button[2]').get_attribute('textContent')
-        #     sleep(.5)
-        # sleep(.5)
+        for x in range(500):
+            entries = page.find_element(By.XPATH, '//*[@id="crash-recent"]/div[2]/div[2]').get_attribute('textContent')
+            results = entries.split('X')[:15]
+            print(results)
+            analise(results)
+            resultado(results)
+            results_b = results
+            while (results_b[0] == results[0]) and (results_b[1] == results[1]):
+                ppg = page.find_element(By.XPATH, '//*[@id="crash-recent"]/div[2]/div[2]').get_attribute('textContent')
+                results_b = ppg.split('X')
+        page.refresh()
+        wait_selector = ''
+        while wait_selector != '2x':
+            wait_selector = page.find_element(By.XPATH, '//*[@id="crash-controller"]/div[1]/div[2]/div[1]/div[1]/button[2]').get_attribute('textContent')
+            sleep(.5)
+        sleep(.5)
 
 rodarBot()
