@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 from time import sleep
 import telepot
 import os
@@ -40,10 +41,9 @@ def resultado(lista):
             bot.sendMessage(chid, f'🏆Win!!')
         else:
             bot.sendMessage(chid, f'❌Loss!!')
-bot.sendMessage(chid, 'testando bot')
+
 def rodarBot():
     page = webdriver.Chrome(executable_path=os.environ.get('CHROMEDRIVER_PATH') ,options=options)
-    #page = webdriver.Chrome(executable_path=r'./chromedriver.exe' ,options=options)
     page.get('https://blaze.com/pt/games/crash')
     print('abrindo navegador')
     sleep(5)
@@ -58,12 +58,10 @@ def rodarBot():
             ppg = page.find_element(By.XPATH, '//*[@id="crash-recent"]/div[2]/div[2]').get_attribute('textContent')
             results_b = ppg.split('X')
         page.refresh()
-        while page.find_element(By.XPATH, '//*[@id="crash-controller"]/div[1]/div[2]/div[1]/div[1]/button[2]').get_attribute('textContent') != '2x':
+        wait_selector = ''
+        while wait_selector != '2x':
+            wait_selector = page.find_element(By.XPATH, '//*[@id="crash-controller"]/div[1]/div[2]/div[1]/div[1]/button[2]').get_attribute('textContent')
             sleep(.5)
         sleep(.5)
 
-while True:
-    try:
-        rodarBot()
-    except:
-        print('reinicaindo sistema...')
+rodarBot()
